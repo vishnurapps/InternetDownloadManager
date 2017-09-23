@@ -34,8 +34,12 @@ class PyDownloder(QDialog):
     def download(self):
         url = self.url.text()
         save_location = self.save_location.text()
-        urllib.request.urlretrieve(url, save_location, self.report)
 
+        try:
+            urllib.request.urlretrieve(url, save_location, self.report)
+        except Exception:
+            QMessageBox.warning(self, "Warning", "Download failed")
+            return 
         QMessageBox.information(self, "Information", "Your download is ready")
         self.progress.setValue(0)
         self.url.setText("")
