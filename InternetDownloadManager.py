@@ -36,6 +36,10 @@ class PyDownloder(QDialog):
         save_location = self.save_location.text()
         urllib.request.urlretrieve(url, save_location, self.report)
 
+        QMessageBox.information(self, "Information", "Your download is ready")
+        self.progress.setValue(0)
+        self.url.setText("")
+        self.save_location.setText("")
 
 
     def report(self, blocknum, blocksize, totalsize):
